@@ -7,9 +7,8 @@
 #define SERVO
 
 void initServo(void);
-void servoSelect(void);
 #define servoMin        150
 #define servoMax        600
-#define servoneutral    375
+#define servoNeutral    375
 
 #endif

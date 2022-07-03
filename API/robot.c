@@ -1,12 +1,17 @@
-#include "MotorHat.h"
-#include <bcm2835.h>
-
+#include"robot.h"
+#include"MotorHat.h"
+#include"Sensor.h"
+#include"Servo.h"
+#include<bcm2835.h>
+#include"PWM.h"
 
 extern void initrobbi(void)
 {
 	initHat();
 	run(RELEASE,0);
 	run(RELEASE,1);
+	initSensor();
+	initServo();	
 }
 
 extern void right(int speed){
@@ -74,8 +79,26 @@ extern void backward(int speed, int seconds){
 	bcm2835_delay(seconds*1000);
 }
 
-extern void motorhatSelect(){
+extern void motorhatSelect(void){
 	bcm2835_i2c_setSlaveAddress(0x60);
 	PWMInit2();
 	setPWMFreq(1600);
+}
+
+extern void servoSelect(void){
+	bcm2835_i2c_setSlaveAddress(0x40);
+	PWMInit2();
+	setPWMFreq(60);
+}
+
+extern void lookleft(void){
+	setPWM(0, 0, servoMin);
+}
+
+extern void lookright(void){
+	setPWM(0, 0, servoMax);
+}
+
+extern void lookahead(void){
+	setPWM(0,0,servoNeutral);
 }

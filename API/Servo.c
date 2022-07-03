@@ -4,7 +4,7 @@ void initServo(void){
 	unsigned i2cAddress = 0x40;
 	PWMInit(i2cAddress);
 	setPWMFreq(60);
-	setPWM(0, 0, 375);
+	setPWM(0, 0, servoNeutral);
 }
 
 void setServoPulse(int channel, double pulse){
@@ -14,10 +14,4 @@ void setServoPulse(int channel, double pulse){
   	pulse *= 100000;
   	pulse /= pulseLength;
   	setPWM(channel, 0, pulse);
-}
-
-void servoSelect(){
-	bcm2835_i2c_setSlaveAddress(0x40);
-	PWMInit2();
-	setPWMFreq(60);
 }

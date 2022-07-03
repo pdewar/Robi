@@ -1,8 +1,8 @@
+#include <stdio.h>
 #include <assert.h>
 #include <bcm2835.h>
 #include "PWM.h"
 #include "MotorHat.h"
-#include <stdio.h>
 
 void initMotors(){
 	motors[0].pwm = 8;

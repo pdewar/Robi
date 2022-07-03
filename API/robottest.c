@@ -1,17 +1,14 @@
-#include "robot.h"
-#include <bcm2835.h>
-#include <stdio.h>
-#include "SENSOR.h"
-#include "Servo.h"
-#include "PWM.h"
+#include"robot.h"
+#include<bcm2835.h>
+#include<stdio.h>
+#include"Sensor.h"
+#include"Servo.h"
 
 double dist_right = 0;
 double dist_left = 0;
 
 int main(int argc,char** argv){
 	initrobbi();
-	initSensor();
-	initServo();
 	while(1 == 1){
 		motorhatSelect();
 
@@ -23,15 +20,15 @@ int main(int argc,char** argv){
 		delay(1000);
 
 		servoSelect();
-		setPWM(0, 0, servoMin); // look left
+		lookleft();
 		delay(1000);
 		dist_right = readSensor();
 		
-		setPWM(0, 0, servoMax); // look right
+		lookright();
 		delay(1000);
 		dist_left = readSensor();
         
-		setPWM(0,0,servoneutral); // look ahead
+		lookahead();
 		
 		if(dist_right > dist_left){
 			motorhatSelect();
